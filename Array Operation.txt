@@ -1,0 +1,127 @@
+#include <iostream>
+using namespace std;
+
+class Array{
+    private:
+    int size;
+    int length;
+    int *items;
+
+    public:
+    Array(int arrsize){
+        size =arrsize;
+        length=0;
+        items = new int [arrsize];
+        cout<<"Array is established\n";
+    }
+
+    void Fill(){
+        int no_of_items;
+        cout<<"enter the # of items\n";
+        cin>>no_of_items;
+        if(no_of_items>size)
+        return;
+        for(int i=0 ; i<no_of_items;i++){
+        cout<<"enter item # "<<++i<<endl;
+        cin>>items[i];
+        length++;
+        }
+    }
+    
+    void Display(){
+        cout<<"Display Array Content\n";
+        for(int i = 0 ; i<length;i++){
+            cout<<items[i]<<"\t";;
+        }
+        cout<<endl;
+    }
+    
+    int getSize(){
+        return size;
+    }
+    
+    int getLength(){
+        return length;
+    }
+    
+    int Search(int key){
+        int index = -1;
+        for(int i=0;i<getLength();i++){
+            if(items[i]==key)
+               { 
+                   index = i;
+                    break;
+               }
+                return index;
+        }
+    }
+    
+    void Append(int newitem){
+        if(length<size){
+            items[length]=newitem;
+            length++;
+        }
+        else cout<<"array is full\n";
+        
+    }
+    
+    void Insert(int index , int newitem){
+        if(index>=0 && index<size)
+        {
+            for(int i= length ; i>index ; i--){
+                items[i]=items[i-1];
+            }
+            items[index]=newitem;
+            length++;
+        }else cout<<"index out of range\n";
+    }
+    
+    void Delete(int index){
+       if(index>=0 && index<size)
+       {
+           for(int i =index; i<length-1 ; i++)
+           {
+               items[i]=items[i+1];
+           }
+           length--;
+       }else cout<<"Index out of Range\n";
+    }
+    
+    void Enlarge(int newsize){
+        if(newsize<=size)
+        cout<<"new size must be larger than the original size\n";
+        else{
+            size = newsize;
+            int *temp=items;
+            items = new int [newsize];
+            for(int i = 0;i<length ; i++)
+            {
+                items[i]=temp[i];
+            }
+            delete []temp;
+        }
+    }
+    
+    void merge(Array other){
+        int newsize = size + other.getSize();
+        size=newsize;
+        int *old = items;
+        items = new int [newsize];
+        for(int i= 0 ; i<length ; i++){
+            items[i]=old[i];
+        }
+        delete[]old;
+        int j=i;
+        for(int = 0 ; i<other.getLength();i++)
+        {
+            items[j++]=other.items[i];
+            length++;
+        }
+    }
+    
+};
+int main(){
+
+   
+
+}

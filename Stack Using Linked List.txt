@@ -1,0 +1,113 @@
+#include <iostream>
+using namespace std;
+
+class node {
+    
+    public:
+    int data;
+    node* next;
+    
+    node(){
+        data=0;
+        next = NULL;
+    }    
+        
+    };
+
+class stack{
+    node* top;
+    public:
+    
+    stack(){
+        top=NULL;
+    }
+    
+    bool isEmpty(){
+        return (top==NULL);
+    }
+    
+    void push(int item){
+            node* newnode = new node();
+            newnode->data = item;
+        if(isEmpty()){
+            
+            newnode->next=NULL;
+            top  = newnode;
+        }
+        else
+        {
+            newnode->next=top;
+            top  = newnode;
+        }
+    }
+    
+    int pop(){
+        node* delptr = top;
+        top = top->next;
+        int value = top->data;
+        delete delptr;
+        return value;
+    }
+    
+    void display(){
+        node* temp = top;
+        while(temp!=NULL){
+            cout<<temp->data<<"\t";
+            temp = temp->next;
+        }
+        cout<<endl;
+    }
+    
+    int peek(){
+        return top->data;
+    }
+    
+    int count(){
+        int counter;
+        node* temp = top;
+        while(temp!=NULL){
+            counter++;
+            temp = temp->next;
+        }
+        cout<<counter<<endl;
+    }
+    
+    bool isFound(int key){
+        bool found = false;
+        node* temp = top;
+        while(temp!=NULL){
+            if(temp->data==key)
+            {
+                found=true;
+                break;
+            }
+            temp = temp->next;
+        }
+        return found;
+        
+    }
+    
+};
+
+
+
+int main(){
+    stack s;
+    int item;
+    for(int i=0;i<3;i++)
+    {
+        cout<<"enter number"<<endl;
+        cin>>item;
+        s.push(item);
+        s.display();
+    }
+    
+    s.pop();
+    s.display();
+    s.pop();
+    s.display();
+
+    
+    
+    
+}
